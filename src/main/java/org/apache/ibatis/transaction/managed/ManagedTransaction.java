@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2015 the original author or authors.
+ *    Copyright 2009-2016 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package org.apache.ibatis.transaction.managed;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import javax.sql.DataSource;
 
 import org.apache.ibatis.logging.Log;
@@ -31,10 +30,9 @@ import org.apache.ibatis.transaction.Transaction;
  * Ignores all commit or rollback requests.
  * By default, it closes the connection but can be configured not to do it.
  *
- * @see ManagedTransactionFactory
- */
-/**
  * @author Clinton Begin
+ *
+ * @see ManagedTransactionFactory
  */
 public class ManagedTransaction implements Transaction {
 
@@ -92,6 +90,11 @@ public class ManagedTransaction implements Transaction {
     if (this.level != null) {
       this.connection.setTransactionIsolation(this.level.getLevel());
     }
+  }
+
+  @Override
+  public Integer getTimeout() throws SQLException {
+    return null;
   }
 
 }
